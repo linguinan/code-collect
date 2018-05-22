@@ -1,4 +1,10 @@
-﻿using System.Collections;
+﻿/*
+ * @Author: collect from web 
+ * @Date: 2018-05-22 15:06:39 
+ * @Last Modified by: lgn
+ * @Last Modified time: 2018-05-22 15:10:14
+ */
+using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEditor.SceneManagement;
@@ -53,4 +59,5 @@ public class AssetsTool : MonoBehaviour {
 		}
 		return path;
 	}
+	
 }

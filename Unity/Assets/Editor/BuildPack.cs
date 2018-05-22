@@ -1,4 +1,10 @@
-﻿using System.Collections;
+﻿/*
+ * @Author: lgn 
+ * @Date: 2018-05-22 15:06:01 
+ * @Last Modified by:   lgn 
+ * @Last Modified time: 2018-05-22 15:06:01 
+ */
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
@@ -18,7 +24,7 @@ public class BuildPack : MonoBehaviour {
 		// AssetDatabase.Refresh();
 
 		var scenes = getScenes();//new [] {"Assets/Scenes/Main.unity"};
-		int bundleVersion = PlayerSettings.Android.bundleVersionCode;
+		string bundleVersion = PlayerSettings.iOS.buildNumber;
 		string today = DateTime.Now.ToString("yyyyMMdd");
 		string locationPathName = PlayerSettings.productName + "_" + today + "_v" + PlayerSettings.bundleVersion + "_build_" + bundleVersion;
 		BuildPipeline.BuildPlayer(scenes, PlayerSettings.productName , BuildTarget.iOS, BuildOptions.None);
@@ -48,9 +54,9 @@ public class BuildPack : MonoBehaviour {
     private static string[] getScenes()
     {
 		List<string> list = new List<string>();
-        Scene[] sceneArr = SceneManager.GetAllScenes();
-        foreach (var scene in sceneArr)
+        for (int i = 0; i < SceneManager.sceneCount; i++)
         {
+            Scene scene = SceneManager.GetSceneAt(i);
             if (scene.IsValid())
             {
 				list.Add(scene.path);

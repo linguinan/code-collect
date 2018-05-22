@@ -1,10 +1,16 @@
-﻿using UnityEditor;
+﻿/*
+ * @Author: collect from web  
+ * @Date: 2018-05-22 15:10:38 
+ * @Last Modified by: lgn
+ * @Last Modified time: 2018-05-22 15:12:29
+ */
+using UnityEditor;
 using UnityEngine;
 
-public class Test {
+public class ModelTool {
 
-	[MenuItem ("MyMenu/Do Test")]
-	static void DoTest () 
+	[MenuItem ("Tools/Center Model")]
+	static void CenterModel () 
 	{
 		Transform parent = 	Selection.activeGameObject.transform;
 		Vector3 postion = parent.position;
