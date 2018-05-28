@@ -41,6 +41,15 @@ public class BuildPack : MonoBehaviour {
         // PlayerSettings.SetScriptingDefineSymbolsForGroup(BuildTargetGroup.Android, "");
         // AssetDatabase.Refresh();
 
+        string[] args = System.Environment.GetCommandLineArgs();
+		foreach (var arg in args)
+		{
+			if(arg == "incbuild")
+			{
+				PlayerSettings.Android.bundleVersionCode++;
+			}
+		}
+
         var scenes = getScenes();//new[] { "Assets/Scenes/Main.unity" };
         int bundleVersion = PlayerSettings.Android.bundleVersionCode;
         string today = DateTime.Now.ToString("yyyyMMdd");
@@ -54,15 +63,29 @@ public class BuildPack : MonoBehaviour {
     private static string[] getScenes()
     {
 		List<string> list = new List<string>();
-        for (int i = 0; i < SceneManager.sceneCount; i++)
-        {
-            Scene scene = SceneManager.GetSceneAt(i);
-            if (scene.IsValid())
+
+        // 在自动打包的情况下无效
+        // for (int i = 0; i < SceneManager.sceneCount; i++)
+        // {
+        //     Scene scene = SceneManager.GetSceneAt(i);
+        //     if (scene.IsValid())
+        //     {
+		// 		list.Add(scene.path);
+        //         Debug.Log(scene.path);
+        //     }
+        // }
+
+        foreach(EditorBuildSettingsScene e in EditorBuildSettings.scenes)
+		{
+			if(e == null)
+				continue;
+			if(e.enabled)
             {
-				list.Add(scene.path);
-                Debug.Log(scene.path);
+				list.Add(e.path);
+                Debug.Log("scene : " + e.path);
             }
-        }
+		}
+
 		return list.ToArray();
     }
 }
