@@ -39,6 +39,10 @@ public class BuildPack : MonoBehaviour {
 			{
 				releaseName = arg.Split("-"[0])[1];
 			}
+			if(arg.StartsWith("ver"))
+			{
+				PlayerSettings.bundleVersion = arg.Split("-"[0])[1];
+			}
         }
 
 		// PlayerSettings.SetScriptingDefineSymbolsForGroup(BuildTargetGroup.iOS, "");
@@ -68,6 +72,10 @@ public class BuildPack : MonoBehaviour {
 			if(arg == "incbuild")
 			{
 				PlayerSettings.Android.bundleVersionCode++;
+			}
+			if(arg.StartsWith("ver"))
+			{
+				PlayerSettings.bundleVersion = arg.Split("-"[0])[1];
 			}
 		}
 

@@ -48,8 +48,7 @@ archivePath=$project_path/build/Unity-iPhone.xcarchive
 # appStoreProvisioningProfile=xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
 
 log_path=$PACK_PATH/log.txt
-#AppStoreExportOptions.plist
-exportOptionsPlist=$PACK_PATH/DevelopmentExportOptions.plist
+exportOptionsPlist=$PACK_PATH/AppStoreExportOptions.plist
 now=`date "+%Y-%m-%d %H-%M-%S"`
 
 # 如果是workspace就用-workspace，就像编译带有CocoaPods的项目，如果是普通项目则用-project
@@ -59,6 +58,6 @@ xcodebuild archive -project $projectName -scheme $scheme -configuration $configu
 echo archive done!
 
 #将Archive导出
-xcodebuild -exportArchive -archivePath $archivePath -exportOptionsPlist $exportOptionsPlist -exportPath $PACK_PATH/$scheme $now >> $log_path
+xcodebuild -exportArchive -archivePath $archivePath -exportOptionsPlist $exportOptionsPlist -exportPath $PACK_PATH/$scheme"-Dis" $now >> $log_path
 
 echo exportArchive done!
