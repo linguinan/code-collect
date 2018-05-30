@@ -6,7 +6,7 @@
 >
 >Some code forget the source url, let me know and I will post it in.
 
->Unity中添加了自动打包apk和ipa的脚本
+#Unity中添加了自动打包apk和ipa的脚本  
 脚本参考自雨松的博客，其中在构建部分因为xcode8.3的改动，命令行参数有变，已根据新版做了调整，并在项目中测试过可用性
 
 AppStoreExportOptions.plist和
