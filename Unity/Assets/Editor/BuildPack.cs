@@ -18,16 +18,37 @@ public class BuildPack : MonoBehaviour {
 	[MenuItem("Tools/发布/iOS", false, 405)]
 	public static void BuildReleaseIOS()
 	{
+		// 平台切换先手动弄好，避免操作失误时误切平台
+		if(EditorUserBuildSettings.activeBuildTarget != BuildTarget.iOS)
+			return;
+
 		EditorUserBuildSettings.SwitchActiveBuildTarget(BuildTargetGroup.iOS, BuildTarget.iOS);
+
+		string releaseName = PlayerSettings.productName;
+		string[] args = System.Environment.GetCommandLineArgs();
+        foreach (var arg in args)
+        {
+            if (arg == "incbuild")
+            {
+				string tmp = PlayerSettings.iOS.buildNumber;
+				int tmpNum = int.Parse(tmp);
+                tmpNum++;
+				PlayerSettings.iOS.buildNumber = tmpNum.ToString();
+            }
+			if(arg.StartsWith("project"))
+			{
+				releaseName = arg.Split("-"[0])[1];
+			}
+        }
 
 		// PlayerSettings.SetScriptingDefineSymbolsForGroup(BuildTargetGroup.iOS, "");
 		// AssetDatabase.Refresh();
 
 		var scenes = getScenes();//new [] {"Assets/Scenes/Main.unity"};
-		string bundleVersion = PlayerSettings.iOS.buildNumber;
-		string today = DateTime.Now.ToString("yyyyMMdd");
-		string locationPathName = PlayerSettings.productName + "_" + today + "_v" + PlayerSettings.bundleVersion + "_build_" + bundleVersion;
-		BuildPipeline.BuildPlayer(scenes, PlayerSettings.productName , BuildTarget.iOS, BuildOptions.None);
+		// string bundleVersion = PlayerSettings.iOS.buildNumber;
+		// string today = DateTime.Now.ToString("yyyyMMdd");
+		string locationPathName = "PackBuild/" + releaseName;// + "_" + today + "_v" + PlayerSettings.bundleVersion + "_build_" + bundleVersion;
+		BuildPipeline.BuildPlayer(scenes, locationPathName , BuildTarget.iOS, BuildOptions.None);
 
 		// PlayerSettings.SetScriptingDefineSymbolsForGroup(BuildTargetGroup.iOS, "Debug");
 		// AssetDatabase.Refresh();
