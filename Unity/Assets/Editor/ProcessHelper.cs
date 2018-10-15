@@ -42,7 +42,7 @@ public class ProcessHelper
     public static void ShowMacNoti(string title, string content)
     {
         string arguments = string.Format("osascript -e 'display notification {0} with title {1}'", content, title);
-        Process.Start("/usr/bash", arguments);
+        Process.Start("/bin/bash", arguments);
     }
 
 
