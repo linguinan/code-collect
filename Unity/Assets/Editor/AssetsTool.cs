@@ -33,9 +33,10 @@ public class AssetsTool : MonoBehaviour {
 				foreach(GameObject go  in gos)
 				{
 					//判断GameObject是否为一个Prefab的引用
-					if(PrefabUtility.GetPrefabType(go)  == PrefabType.PrefabInstance)
+					
+					if(PrefabUtility.GetPrefabAssetType(go) != PrefabAssetType.NotAPrefab)
 					{
-						UnityEngine.Object parentObject = PrefabUtility.GetPrefabParent(go); 
+						UnityEngine.Object parentObject = PrefabUtility.GetCorrespondingObjectFromSource(go); 
 						string path = AssetDatabase.GetAssetPath(parentObject);
 						//判断GameObject的Prefab是否和右键选择的Prefab是同一路径。
 						if(path == AssetDatabase.GetAssetPath(Selection.activeGameObject))
