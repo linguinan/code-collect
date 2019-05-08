@@ -7,9 +7,9 @@
 using UnityEngine;
 
 /** 
-    * Unity单例对象·GameObject实例
-    * 用法：class Type : UnitySingleton<Type>
-    */
+* Unity单例对象·GameObject实例
+* 用法：class Type : UnitySingleton<Type>
+*/
 public abstract class UnitySingleton<T> : MonoBehaviour where T : Component
 {
     private static T _instance;
@@ -49,7 +49,7 @@ public abstract class UnitySingleton<T> : MonoBehaviour where T : Component
         }
     }
 
-    private void OnDestroy() 
+    public virtual void OnDestroy()  
     {
         if (_instance == this)
 		{
